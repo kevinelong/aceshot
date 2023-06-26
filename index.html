@@ -1,8 +1,8 @@
 <style>
     body {
-	margin:0;
-	padding: 0;
-	font-family: SegoeUI, Tahoma, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        font-family: SegoeUI, Tahoma, Verdana, sans-serif;
         font-size: 2vh;
     }
 
@@ -11,41 +11,57 @@
     }
 
     .page {
-	background: #eee;
-	border-top: 1px solid black;
+        background: #eee;
+        border-top: 1px solid black;
         width: 100vw;
         height: 100vh;
         overflow: hidden;
     }
 
+    .title a,
     .title,
     a.link {
-	text-decoration: none;
-	color: black;
-	background: #ddd;
+        text-decoration: none;
+        color: black;
+        background: white;
         display: inline-block;
-        padding: 0.5rem 0.25rem;;
-	width: 100%;
-	border-bottom: 1px solid black;
-    }
-    .title{
-	background: white;
-        padding: 0;
-	width: 100%;
-	border-bottom: none;
+        padding: 0.5rem 0.25rem;
+        ;
+        border-bottom: 1px solid black;
+        width: 100%;
+
     }
 
+    .title {
+        display: block;
+        background: white;
+        padding: 0;
+        width: 100%;
+        border-bottom: none;
+    }
+
+    .title a {
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .title a.link {
+        display: inline-block;
+        width: 100%;
+        background: #99ccff;
+
+    }
 </style>
 
 <body id="app"></body>
 
 <script>
     const safe = (name) => encodeURI(name.toLowerCase());
-    const page = (name) => 
-`<div class="page ${safe(name)}" id="${safe(name)}">
-	<div class="title">${link(name)}</div>
+    const page = (name) =>
+        `<div class="page ${safe(name)}" id="${safe(name)}">
+	<div class="title">${link("&lt;&nbsp;" + name, "#app")}</div>
 </div>`;
-    const link = s => `<a href="#${safe(s)}"i class="link">${s}</a>`;
+    const link = (s, h) => `<a href="${h ? h : "#"+safe(s)}" class="link">${s}</a>`;
     const list = s => s.split(NEW_LINE).map(s => s.trim()).filter(s => s.length > 0);
 
     const NEW_LINE = "\n";
@@ -59,7 +75,8 @@ Players
 Auctions
 `);
 
-    const all = PAGES.map(link).join(EMPTY) + PAGES.map(page).join(EMPTY);
-    document.body.innerHTML = all;
+    let html = `<nav>` + PAGES.map(s => link(s)).join(EMPTY) + `</nav>`;
+    html += `<content>` + PAGES.map(s => page(s)).join(EMPTY) + `</content>`;
+    document.body.innerHTML = html;
 
 </script>
