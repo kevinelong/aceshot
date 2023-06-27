@@ -3,14 +3,16 @@ body {
     padding: 0;
     font-family: SegoeUI, Tahoma, Verdana, sans-serif;
     font-size: 2vh;
+    background: #334;
+    color: #dde;
 }
 
 #app {
     background: #666;
 }
-
+nav,
 .page {
-    background: #eee;
+    background: #334;
     border-top: 1px solid black;
     width: 100vw;
     height: 100vh;
@@ -21,19 +23,17 @@ body {
 .title,
 a.link {
     text-decoration: none;
-    color: black;
-    background: white;
     display: inline-block;
     padding: 0.5rem 0.25rem;
-    ;
     border-bottom: 1px solid black;
     width: 100%;
-
+    background: linear-gradient(#334,#667,#778,#889,#889,#778, #667, #334);
+    color: #ccd;
+    text-shadow: 0 0 1px #334, 0 0 3px #dde;
 }
 
 .title {
     display: block;
-    background: white;
     padding: 0;
     width: 100%;
     border-bottom: none;
@@ -48,5 +48,7 @@ a.link {
     display: inline-block;
     width: 100%;
     background: #99ccff;
-
+    background: linear-gradient(#334,#667,#778,#889,#889,#778, #667, #334);
+    color: #dde;
+    text-shadow: 0 0 1px #334, 0 0 3px #ccd;
 }
