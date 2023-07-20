@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: SegoeUI, Tahoma, Verdana, sans-serif;
-    font-size: 3vh;
+    font-size: min(7vw, 3vh);
     background: #334;
     color: #dde;
 }
@@ -13,7 +13,7 @@ body {
 nav,
 .page {
     background: #334;
-    border-top: 1px solid black;
+    border-top: 0.2rem solid black;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -24,12 +24,12 @@ nav,
 a.link {
     text-decoration: none;
     display: inline-block;
-    padding: 0.5rem 0.25rem;
-    border-bottom: 1px solid black;
+    padding: 0.75rem 0rem 0.75rem min(3.5rem, 15vw);
+    border-bottom: 0.2rem solid black;
     width: 100%;
     background: linear-gradient(#334,#667,#778,#889,#889,#778, #667, #334);
     color: #ccd;
-    text-shadow: 0 0 1px #334, 0 0 3px #dde;
+    text-shadow: 0 0 0.2rem #334, 0 0 0.6rem #dde;
 }
 
 .title {
@@ -50,5 +50,5 @@ a.link {
     background: #99ccff;
     background: linear-gradient(#334,#667,#778,#889,#889,#778, #667, #334);
     color: #dde;
-    text-shadow: 0 0 1px #334, 0 0 3px #ccd;
+    text-shadow: 0 0 0.2rem #334, 0 0 0.6rem #ccd;
 }
