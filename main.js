@@ -17,6 +17,7 @@ const PAGES = list(`
 &#128176;&nbsp;Auctions
 `);
 
-let html = `<nav>` + PAGES.map(s => link(s)).join(EMPTY) + `</nav>`;
+let html = `<nav>` + PAGES.map(s => link(s)).join(EMPTY) + 
+`<div id="logo"><img src="ace-shot-logo.png"><br>Premium Tournament Direction<br>&amp;<br>Calcutta Auctions</div>` + `</nav>`;
 html += `<content>` + PAGES.map(s => page(s)).join(EMPTY) + `</content>`;
 document.body.innerHTML = html;
