@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  background: #334;
+  background: rgb(133, 66, 66);
 }
 
 .bracket {
@@ -33,7 +33,7 @@ body {
 }
 .bracket .round .winners > div.matchups .matchup .participants .participant {
   box-sizing: border-box;
-  color: #313131;
+  color: #cecece;
   border-left: 0.25rem solid #cecece;
   background: #123;
   width: 14rem;

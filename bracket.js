@@ -9,7 +9,7 @@ const tag = (tagName, content, attributes = "") => `<${tagName} ${attributes}>${
 const div = (className, content, attributes = "") => tag("div", content, `class="${className}"`);
 const span = (content, className, attributes = "") => tag("span", content, `class="${className}"`);
 const winners = (content) => div("winners", content);
-const round = (content) => div("round", content);
+const round = (content) => div("round quarterfinals", content);
 const matchups = (content) => div("matchups", content);
 const matchup = (content) => div("matchup", content);
 const participants = (content) => div("participants", content);
@@ -21,6 +21,7 @@ function bracket(data = {
         { name: "Barry Bogart", rating: 502, seed: Math.random() },
         { name: "Charles Carpenter", rating: 503, seed: Math.random() },
         { name: "David Dolly", rating: 504, seed: Math.random() },
+        { name: "Eric Eagle", rating: 501, seed: Math.random() },
     ],
     sides: ["A", "B"]
 }) {
@@ -31,31 +32,25 @@ function bracket(data = {
     const roundList = []
 
     while (count > 1) {
-        const matchupList = [];
+        const pairs = [];
+        const mups = [];
 
-        while (data.players.length > 0) {
-            const players = [];
-            
-            if (data.players.length > 0) {
-                players.push(data.players.pop());
-            }
-
-            if (data.players.length > 0) {
-                players.push(data.players.pop());
-            } else {
-                players.push("BYE");
-            }
-
-            matchupList.push(participants(players.map(
+        while (data.players.length > 1) {
+            pairs.push(participants([data.players.pop(), data.players.pop()].map(
                 p => participant(span(p.name))
-            ).join(EMPTY)));
-
-            const r = round(matchups(
-                matchupList.map(matchup).join(EMPTY)
-            ));
-            roundList.push(r);
-            rounds += 1;
+            )));
         }
+        if (data.players.length === 1) {
+            pairs.push(participants([data.players.pop(), {name:"BYE"}].map(
+                p => participant(span(p.name))
+            )));
+        }
+        
+        mups.push(winners(matchups(
+            pairs.map(p => matchup(p)).join(EMPTY)
+        )));
+        roundList.push(round(mups.join(EMPTY)));
+        rounds += 1;
         count = Math.floor(count / 2);
     }
     output.push(`ROUNDS "${rounds}"`);
