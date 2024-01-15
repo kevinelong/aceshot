@@ -1,7 +1,7 @@
 *{
     scroll-behavior: smooth;
 }
-
+/* 
 body {
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body {
     font-size: min(7vw, 3vh);
     background: #334;
     color: #dde;
-}
+} */
 
 #logo {
     display: block;
