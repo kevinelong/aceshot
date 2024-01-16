@@ -14,7 +14,7 @@ const merger = (content) => div("merger", content);
 const line = (content) => div("line", content);
 
 
-const round = (content) => div("round quarterfinals", content);
+const round = (className, content) => div(`round ${className}`, content);
 const matchups = (content) => div("matchups", content);
 const matchup = (content) => div("matchup", content);
 const participants = (content) => div("participants", content);
@@ -32,7 +32,7 @@ function bracket(data = {
 }) {
     data.players.sort((a, b) => a.seed - b.seed)
     const output = [];
-    let rounds = 0;
+    let rounds = 1;
     let count = data.players.length;
     const roundList = []
     let mups = [];
@@ -42,6 +42,27 @@ function bracket(data = {
 
     while (goal < Math.ceil(data.players.length / 2)) {
         goal *= 2;
+    }
+    console.log("matchesRequired", goal);
+
+    function calculateRounds(matchCount) {
+        let roundsRequired = 1;
+        while (matchCount >= 2) {
+            roundsRequired++;
+            matchCount /= 2;
+        }
+        return roundsRequired;
+    }
+    const roundsRequired = calculateRounds(goal);
+    console.log("roundsRequired", roundsRequired);
+
+    const ROUND_NAMES = ["finals", "semifinals", "quarterfinals"];
+    function getRoundName(roundNumber, totalRounds) {
+        const index = totalRounds - roundNumber;
+        if (index >= ROUND_NAMES.length) {
+            return "r" + index;
+        }
+        return ROUND_NAMES[index];
     }
 
     while (data.players.length > 0) {
@@ -67,13 +88,13 @@ function bracket(data = {
             matchup(pairs[i + 1])
         ) + connector(merger() + line())));
     }
-    roundList.push(round(mups.join(EMPTY)));
-    while(goal > 1){
-        debugger;
-        mups=[];
-        pairs=[];
-        totalPairs=0;
-        goal = Math.floor(goal/2);
+    roundList.push(round(getRoundName(rounds, roundsRequired), mups.join(EMPTY)));
+    while (goal > 1) {
+        rounds += 1;
+        mups = [];
+        pairs = [];
+        totalPairs = 0;
+        goal = Math.floor(goal / 2);
         while (totalPairs < goal) {
             pairs.push(participants(participant(span("")) + participant(span("")))) +
                 matchup(participants(participant(span("")) + participant(span(""))))
@@ -83,10 +104,9 @@ function bracket(data = {
             mups.push(winners(matchups(
                 matchup(pairs[i]) +
                 matchup(pairs[i + 1])
-            ) + (goal > 1 ? connector(merger() + line()) :"") ));
+            ) + (goal > 1 ? connector(merger() + line()) : "")));
         }
-        roundList.push(round(mups.join(EMPTY)));
-        rounds += 1;
+        roundList.push(round(getRoundName(rounds, roundsRequired), mups.join(EMPTY)));
     }
     count = Math.floor(count / 2);
     output.push(`ROUNDS "${rounds}"`);
