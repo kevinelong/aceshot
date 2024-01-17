@@ -25,6 +25,16 @@ window.CONTENT = dict(`
             { name: "Charles Carpenter", rating: 503, seed: Math.random() },
             { name: "David Dolly", rating: 504, seed: Math.random() },
             { name: "Eric Eagle", rating: 501, seed: Math.random() },
+            { name: "Alfred Almond.", rating: 501, seed: Math.random() },
+            { name: "Barry Bogart", rating: 502, seed: Math.random() },
+            { name: "Charles Carpenter", rating: 503, seed: Math.random() },
+            { name: "David Dolly", rating: 504, seed: Math.random() },
+            { name: "Eric Eagle", rating: 501, seed: Math.random() },
+            { name: "Alfred Almond.", rating: 501, seed: Math.random() },
+            { name: "Barry Bogart", rating: 502, seed: Math.random() },
+            { name: "Charles Carpenter", rating: 503, seed: Math.random() },
+            { name: "David Dolly", rating: 504, seed: Math.random() },
+            { name: "Eric Eagle", rating: 501, seed: Math.random() },
         ],
         sides: ["A", "B"]
     })}

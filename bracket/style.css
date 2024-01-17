@@ -1,20 +1,26 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto+Slab:400,700';
 html {
-  font-size: 1rem;
+  font-size: 0.1vw;
 }
 
 body {
   background: #334;
+  font-size: 0.1vw;
 }
 
 .bracket {
   display: inline-block;
   position: absolute;
-  left: 50%;
+  left:0;
+  top:0;
+  /* left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   white-space: nowrap;
   font-size: 0;
+  width: 50vw;
+  height: 50vh;
+  object-fit: contain;
 }
 .bracket .round {
   display: inline-block;
@@ -36,7 +42,7 @@ body {
   color: #313131;
   border-left: 0.25rem solid #cecece;
   background: #123;
-  width: 14rem;
+  width: 7vw;
   height: 3rem;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
