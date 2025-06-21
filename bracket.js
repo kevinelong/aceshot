@@ -1,16 +1,20 @@
 import { EMPTY, dict, list, link } from "./utils.js";
 
+const sctag = (tagName, attributes = "") => `<${tagName} ${attributes}>`
 const tag = (tagName, content, attributes = "") => `<${tagName} ${attributes}>${content}</${tagName}>`
 const div = (className, content, attributes = "") => tag("div", content, `class="${className}"`);
 const span = (content, className, attributes = "") => tag("span", content, `class="${className}"`);
-const winners = (content) => div("winners", content);
-const connector = (content) => div("connector", content);
+const winners = (content) =>  content;
+// const winners = (content) => div("winners", content);
+const connector = (content) => "";
+// const connector = (content) => div("connector", content);
 const merger = (content) => div("merger", content);
 const line = (content) => div("line", content);
 
 
 const round = (className, content) => div(`round ${className}`, content);
-const matchups = (content) => div("matchups", content);
+const matchups = (content) => content;
+// const matchups = (content) => div("matchups", content);
 const matchup = (content) => div("matchup", content);
 const participants = (content) => div("participants", content);
 const participant = (content) => div("participant", content);
@@ -66,11 +70,12 @@ function bracket(data = {
     while (data.players.length > 0) {
         if (data.players.length === 1) {
             pairs.push(participants([data.players.pop(), { name: "BYE" }].map(
-                p => participant(span(p.name))
+                p => participant(span(p.name) + sctag("input",`type="number" value="0"`), `style="width:${100/roundsRequired}vw"`)
             )));
         } else {
             pairs.push(participants([data.players.pop(), data.players.pop()].map(
-                p => participant(span(p.name))
+                p => participant(span(p.name)+ sctag("input",`type="number" value="0"`), `style="width:${100/roundsRequired}vw"`) 
+                // p => participant(span(""))
             )));
         }
         totalPairs += 1;
@@ -104,10 +109,9 @@ function bracket(data = {
             totalPairs += 1;
         }
 
-        for (let i = 0; i < pairs.length; i += 2) {
+        for (let i = 0; i < pairs.length; i++) {
             mups.push(winners(matchups(
-                matchup(pairs[i]) +
-                matchup(pairs[i + 1])
+                matchup(pairs[i])
             ) + (goal > 1 ? connector(merger() + line()) : "")));
         }
 
